@@ -17,6 +17,7 @@ function AlgoritmaDashboard() {
   const [completedProblems, setCompletedProblems] = useState([]); // array of problem IDs yg skor >= 60
   const [showNamePopup, setShowNamePopup] = useState(true);
   const [tempName, setTempName] = useState('');
+  const [selectedSymbol, setSelectedSymbol] = useState(null);
 
 const isValidName = (name) => {
   const trimmed = name.trim();
@@ -266,19 +267,46 @@ const isValidName = (name) => {
     { id: 'end', name: 'Selesai', type: 'terminator', color: 'bg-green-100 border-green-400' }
   ];
 
-  const handleDragStart = (e, symbol) => {
-    e.dataTransfer.setData('symbol', JSON.stringify(symbol));
-  };
+  // Klik simbol → pilih/deselect
+const handleSelectSymbol = (symbol) => {
+  if (selectedSymbol?.id === symbol.id) {
+    setSelectedSymbol(null); // deselect kalau klik sama
+  } else {
+    setSelectedSymbol(symbol);
+  }
+};
 
-  const handleDrop = (e, index) => {
-    e.preventDefault();
-    const symbol = JSON.parse(e.dataTransfer.getData('symbol'));
+// Klik slot → taruh simbol yang dipilih
+const handleSlotClick = (index) => {
+  if (selectedSymbol) {
     const newFlowchart = [...flowchart];
-    newFlowchart[index] = symbol;
+    newFlowchart[index] = selectedSymbol;
     setFlowchart(newFlowchart);
-  };
+    setSelectedSymbol(null); // reset pilihan setelah ditaruh
+  } else if (flowchart[index]) {
+    // Klik slot yang sudah terisi → hapus simbolnya
+    const newFlowchart = [...flowchart];
+    newFlowchart[index] = null;
+    setFlowchart(newFlowchart);
+  }
+};
 
-  const handleDragOver = (e) => e.preventDefault();
+// Tetap support drag & drop untuk laptop
+const handleDragStart = (e, symbol) => {
+  e.dataTransfer.setData('symbol', JSON.stringify(symbol));
+  setSelectedSymbol(symbol);
+};
+
+const handleDrop = (e, index) => {
+  e.preventDefault();
+  const symbol = JSON.parse(e.dataTransfer.getData('symbol'));
+  const newFlowchart = [...flowchart];
+  newFlowchart[index] = symbol;
+  setFlowchart(newFlowchart);
+  setSelectedSymbol(null);
+};
+
+const handleDragOver = (e) => e.preventDefault();
 
   const initializeWorkspace = (index) => {
     setCurrentProblemIndex(index);
@@ -1074,15 +1102,24 @@ if (showNamePopup) {
                     Susun Flowchart
                   </h3>
                   <div className="mb-6">
-                    <p className="font-semibold text-gray-700 mb-3">Seret simbol ke area flowchart:</p>
+                    <p className="font-semibold text-gray-700 mb-1">Pilih simbol lalu klik slot:</p>
+                    <p className="text-xs text-gray-500 mb-3">
+                      💡 <strong>Laptop:</strong> Klik simbol atau drag & drop ke slot | 
+                      <strong> HP:</strong> Klik simbol dulu, lalu klik slot yang diinginkan.
+                      Klik slot yang sudah terisi untuk menghapusnya.
+                    </p>
                     <div className="flex flex-wrap gap-3">
                       {flowchartSymbols.map((symbol) => (
-                    <div
-                      key={symbol.id}
-                      draggable
-                      onDragStart={(e) => handleDragStart(e, symbol)}
-                      className="cursor-move hover:shadow-lg transition-all hover:scale-105"
-                    >
+                      <div
+                        key={symbol.id}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, symbol)}
+                        onClick={() => handleSelectSymbol(symbol)}
+                        className={`cursor-pointer hover:shadow-lg transition-all hover:scale-105
+                          ${selectedSymbol?.id === symbol.id 
+                            ? 'ring-4 ring-indigo-500 ring-offset-2 scale-105' 
+                            : ''}`}
+                      >
                         {/* TERMINATOR - oval */}
                         {(symbol.id === 'start' || symbol.id === 'end') && (
                         <div className="px-6 py-2 bg-green-100 border-2 border-green-400 rounded-full font-semibold text-sm text-center min-w-[100px]">
@@ -1124,7 +1161,11 @@ if (showNamePopup) {
                     <div
                       onDrop={(e) => handleDrop(e, idx)}
                       onDragOver={handleDragOver}
-                      className="flex items-center justify-center"
+                      onClick={() => handleSlotClick(idx)}
+                      className={`flex items-center justify-center cursor-pointer transition-all
+                        ${selectedSymbol && !flowchart[idx] 
+                          ? 'ring-2 ring-indigo-400 ring-offset-1 rounded-lg' 
+                          : ''}`}
                       style={{ minHeight: '80px', minWidth: '220px' }}
                     >
                           {!symbol ? (
