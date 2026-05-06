@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/AlgoFlow/static/css/main.a2f66721.css",
+    "main.js": "/AlgoFlow/static/js/main.f6133728.js",
+    "static/js/453.79443422.chunk.js": "/AlgoFlow/static/js/453.79443422.chunk.js",
+    "index.html": "/AlgoFlow/index.html",
+    "main.a2f66721.css.map": "/AlgoFlow/static/css/main.a2f66721.css.map",
+    "main.f6133728.js.map": "/AlgoFlow/static/js/main.f6133728.js.map",
+    "453.79443422.chunk.js.map": "/AlgoFlow/static/js/453.79443422.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a2f66721.css",
+    "static/js/main.f6133728.js"
+  ]
+}
