@@ -940,14 +940,14 @@ if (showNamePopup) {
           /* ========== TAB WORKSPACE ========== */
           <div className="space-y-6">
             {/* Tutorial */}
-            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <HelpCircle size={28} className="text-amber-600" />
-                  <h2 className="text-2xl font-bold text-gray-800">Cara Menggunakan Workspace</h2>
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl p-4">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <HelpCircle size={20} className="text-amber-600 flex-shrink-0" />
+                  <h2 className="text-base md:text-xl font-bold text-gray-800">Cara Menggunakan Workspace</h2>
                 </div>
                 <button onClick={() => setShowTutorial(!showTutorial)}
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-semibold">
+                  className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-semibold text-sm flex-shrink-0">
                   {showTutorial ? 'Sembunyikan' : 'Lihat Tutorial'}
                 </button>
               </div>
@@ -995,64 +995,69 @@ if (showNamePopup) {
               <>
                 {/* Header Soal — TANPA tombol Ganti Masalah, ada navigasi */}
                 <div className="bg-white rounded-xl shadow-lg p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${currentProblem.level === 'Mudah' ? 'bg-green-100 text-green-800' : currentProblem.level === 'Sedang' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
-                          {currentProblem.level === 'Mudah' ? '🟢' : currentProblem.level === 'Sedang' ? '🟡' : '🔴'} {currentProblem.level}
+                  <div className="flex flex-col gap-3">
+                  {/* Baris 1: Badge level + tombol navigasi */}
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                        currentProblem.level === 'Mudah' ? 'bg-green-100 text-green-800' : 
+                        currentProblem.level === 'Sedang' ? 'bg-yellow-100 text-yellow-800' : 
+                        'bg-red-100 text-red-800'}`}>
+                        {currentProblem.level === 'Mudah' ? '🟢' : currentProblem.level === 'Sedang' ? '🟡' : '🔴'} {currentProblem.level}
+                      </span>
+                      <span className="text-xs text-gray-500">Soal {currentProblem.id} dari 9</span>
+                      {completedProblems.includes(currentProblem.id) && (
+                        <span className="flex items-center gap-1 text-green-700 text-xs font-bold bg-green-100 px-2 py-1 rounded-full">
+                          <CheckCircle size={12} /> Selesai
                         </span>
-                        <span className="text-sm text-gray-500">Soal {currentProblem.id} dari 9</span>
-                        {completedProblems.includes(currentProblem.id) && (
-                          <span className="flex items-center gap-1 text-green-700 text-xs font-bold bg-green-100 px-2 py-1 rounded-full">
-                            <CheckCircle size={12} /> Selesai
-                          </span>
-                        )}
-                      </div>
-                      <h2 className="text-2xl font-bold text-gray-800">{currentProblem.title}</h2>
-                      <p className="text-gray-600 mt-2">{currentProblem.description}</p>
+                      )}
                     </div>
-
-                    {/* Navigasi soal */}
-                    <div className="flex flex-col gap-2 flex-shrink-0">
-                      <button
-                        onClick={() => setCurrentProblemIndex(null)}
-                        className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 font-semibold text-sm flex items-center gap-2"
-                      >
-                        📋 Daftar Soal
+                    {/* Tombol navigasi */}
+                    <div className="flex gap-2 flex-shrink-0">
+                      <button onClick={() => setCurrentProblemIndex(null)}
+                        className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 font-semibold text-xs flex items-center gap-1">
+                        📋 Daftar
                       </button>
                       {hasNextProblem() && (
-                        <button
-                          onClick={goToNextProblem}
-                          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold text-sm flex items-center gap-2"
-                        >
-                          Soal Berikutnya <ChevronRight size={16} />
+                        <button onClick={goToNextProblem}
+                          className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold text-xs flex items-center gap-1">
+                          Next <ChevronRight size={14} />
                         </button>
                       )}
                     </div>
                   </div>
+
+                  {/* Baris 2: Judul + Deskripsi */}
+                  <div>
+                    <h2 className="text-lg md:text-2xl font-bold text-gray-800">{currentProblem.title}</h2>
+                    <p className="text-sm text-gray-600 mt-1 text-justify">{currentProblem.description}</p>
+                  </div>
+                </div>
                 </div>
 
                 {/* Analisis IPO */}
                 <div className="bg-white rounded-xl shadow-lg p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <span className="bg-yellow-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                    Analisis Masalah (Input-Proses-Output)
+                  <h3 className="text-base md:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span className="bg-yellow-500 text-white w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm flex-shrink-0">1</span>
+                    Analisis Masalah (IPO)
                   </h3>
                   <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-4 rounded">
-                    <p className="font-semibold text-yellow-900 mb-2">💡 Pertanyaan Pemantik:</p>
-                    <ul className="space-y-1 text-sm text-yellow-800">
+                    <p className="font-semibold text-yellow-900 mb-2 tets-sm">💡 Pertanyaan Pemantik:</p>
+                    <ul className="space-y-1 text-xs md:text-sm text-yellow-800">
                       {currentProblem.hints.map((hint, idx) => <li key={idx}>• {hint}</li>)}
                     </ul>
                   </div>
                   <div className="space-y-6">
                     {/* INPUT */}
                     <div className="border-2 border-gray-200 rounded-lg p-4 bg-blue-50">
-                      <label className="block font-bold text-gray-800 mb-3 text-lg">📥 Input (Masukan) - Pilih yang sesuai:</label>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      <label className="block font-bold text-gray-800 mb-3 text-lg">
+                        📥 Input (Masukan) - Pilih yang sesuai:
+                      </label>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                         {currentProblem.inputOptions.map((option, idx) => (
-                          <label key={idx} className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-all ${analysis.selectedInputs.includes(option) ? 'bg-indigo-100 border-indigo-500 shadow-md' : 'bg-white border-gray-300 hover:border-indigo-300'}`}>
-                            <input type="checkbox" checked={analysis.selectedInputs.includes(option)} onChange={() => toggleInput(option)} className="w-5 h-5 text-indigo-600 rounded" />
-                            <span className="font-semibold text-gray-800">{option}</span>
+                          <label key={idx} className={`flex items-center gap-2 p-2 md:p-3 rounded-lg border-2 cursor-pointer transition-all ${analysis.selectedInputs.includes(option) ? 'bg-indigo-100 border-indigo-500 shadow-md' : 'bg-white border-gray-300 hover:border-indigo-300'}`}>
+                            <input type="checkbox" checked={analysis.selectedInputs.includes(option)} onChange={() => toggleInput(option)} className="w-4 h-4 md:h-5 text-indigo-600 rounded" />
+                            <span className="font-semibold text-gray-800 text-xs md:text-sm">{option}</span>
                           </label>
                         ))}
                       </div>
@@ -1060,7 +1065,9 @@ if (showNamePopup) {
                     </div>
                     {/* PROSES */}
                     <div className="border-2 border-gray-200 rounded-lg p-4 bg-green-50">
-                      <label className="block font-bold text-gray-800 mb-3 text-lg">⚙️ Proses - Tulis penjelasan:</label>
+                      <label className="block font-bold text-gray-800 mb-3 text-lg">
+                        ⚙️ Proses (Langkah Algoritma) - Tulis penjelasan:
+                      </label>
                       <textarea
                         value={analysis.processText}
                         onChange={(e) => setAnalysis({ ...analysis, processText: e.target.value })}
@@ -1081,7 +1088,9 @@ if (showNamePopup) {
                     </div>
                     {/* OUTPUT */}
                     <div className="border-2 border-gray-200 rounded-lg p-4 bg-purple-50">
-                      <label className="block font-bold text-gray-800 mb-3 text-lg">📤 Output (Keluaran) - Pilih yang sesuai:</label>
+                     <label className="block font-bold text-gray-800 mb-3 text-lg">
+                        📤 Output (Keluaran) - Pilih yang sesuai:
+                      </label>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {currentProblem.outputOptions.map((option, idx) => (
                           <label key={idx} className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-all ${analysis.selectedOutputs.includes(option) ? 'bg-purple-100 border-purple-500 shadow-md' : 'bg-white border-gray-300 hover:border-purple-300'}`}>
@@ -1097,8 +1106,8 @@ if (showNamePopup) {
 
                 {/* Flowchart */}
                 <div className="bg-white rounded-xl shadow-lg p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <span className="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+                  <h3 className="text-base md:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span className="bg-blue-500 text-white w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm flex-shrink-0">2</span>
                     Susun Flowchart
                   </h3>
                   <div className="mb-6">
@@ -1214,16 +1223,16 @@ if (showNamePopup) {
 
                 {/* Simulasi */}
                 <div className="bg-white rounded-xl shadow-lg p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                      <span className="bg-purple-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
-                      Simulasi dan Feedback
-                    </h3>
-                    <button onClick={runSimulation}
-                      className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold rounded-lg shadow-lg flex items-center gap-2">
-                      <Play size={20} /> Jalankan Simulasi
-                    </button>
-                  </div>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+                  <h3 className="text-base md:text-xl font-bold text-gray-800 flex items-center gap-2">
+                    <span className="bg-purple-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm flex-shrink-0">3</span>
+                    Simulasi dan Feedback
+                  </h3>
+                  <button onClick={runSimulation}
+                    className="w-full md:w-auto px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold rounded-lg shadow-lg flex items-center justify-center gap-2 text-sm">
+                    <Play size={16} /> Jalankan Simulasi
+                  </button>
+                </div>
 
                   {showFeedback && simulationResult && (
                     <div className="space-y-4">
