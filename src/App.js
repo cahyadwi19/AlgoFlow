@@ -57,41 +57,72 @@ const isValidName = (name) => {
           'Finiteness - Algoritma harus berakhir setelah sejumlah langkah tertentu',
           'Effectiveness - Setiap langkah harus dapat dikerjakan'
         ],
+        ciriTidakBaik: [
+          'Tidak memiliki input yang jelas sehingga program tidak tahu data apa yang dibutuhkan',
+          'Tidak memiliki output yang terdefinisi sehingga hasil tidak diketahui',
+          'Langkah-langkah ambigu dan membingungkan sehingga sulit dieksekusi',
+          'Tidak memiliki akhir (infinite loop) sehingga program berjalan terus tanpa henti',
+          'Langkah tidak efektif dan tidak dapat dikerjakan oleh komputer'
+        ],
         contoh: [
-          {
-            judul: 'Algoritma Membuat Teh Manis',
-            langkah: [
-              '1. Siapkan gelas, teh celup, air panas, dan gula',
-              '2. Masukkan teh celup ke dalam gelas',
-              '3. Tuangkan air panas ke dalam gelas',
-              '4. Tunggu 3-5 menit',
-              '5. Angkat teh celup',
-              '6. Tambahkan 2 sendok gula',
-              '7. Aduk hingga gula larut',
-              '8. Teh manis siap dihidangkan'
-            ]
-          },
-          {
-            judul: 'Algoritma Menentukan Bilangan Terbesar',
-            langkah: [
-              '1. Masukkan tiga bilangan: A, B, C',
-              '2. Anggap A adalah bilangan terbesar',
-              '3. Jika B lebih besar dari A, maka B adalah terbesar',
-              '4. Jika C lebih besar dari bilangan terbesar, maka C adalah terbesar',
-              '5. Tampilkan bilangan terbesar'
-            ]
-          },
-          {judul: 'Algoritma mencari buku di perpustakaan',
-            langkah: [
-              '1. Catat judul buku yang dicari',
-              '2. Tanyakan ke petugas letak kategori buku',
-              '3. Pergi ke rak sesuai kategori',
-              '4. Cari buku berdasarkan urutan abjad',
-              '5. Jika ketemu, ambil bukunya',
-              '6. Jika tidak ketemu, tanyakan ke petugas'
-            ]
-          }
-        ]
+        {
+          judul: 'Algoritma Membuat Teh Manis',
+          langkah: [
+            '1. Siapkan gelas, teh celup, air panas, dan gula',
+            '2. Masukkan teh celup ke dalam gelas',
+            '3. Tuangkan air panas ke dalam gelas',
+            '4. Tunggu 3-5 menit',
+            '5. Angkat teh celup',
+            '6. Tambahkan 2 sendok gula',
+            '7. Aduk hingga gula larut',
+            '8. Teh manis siap dihidangkan'
+          ],
+          salah: [
+            '1. Siapkan sesuatu',
+            '2. Lakukan sesuatu dengan teh',
+            '3. Tambahkan bahan-bahan',
+            '4. Aduk jika perlu',
+            '5. Sajikan'
+          ],
+          kesalahan: 'Langkah tidak spesifik dan ambigu — "sesuatu" dan "bahan-bahan" tidak jelas'
+        },
+        {
+          judul: 'Algoritma Menentukan Bilangan Terbesar',
+          langkah: [
+            '1. Masukkan tiga bilangan: A, B, C',
+            '2. Anggap A adalah bilangan terbesar',
+            '3. Jika B lebih besar dari A, maka B adalah terbesar',
+            '4. Jika C lebih besar dari bilangan terbesar, maka C adalah terbesar',
+            '5. Tampilkan bilangan terbesar'
+          ],
+          salah: [
+            '1. Masukkan bilangan',
+            '2. Bandingkan semua bilangan',
+            '3. Tampilkan yang terbesar',
+            '4. Ulangi jika perlu',
+            '5. Selesai jika sudah'
+          ],
+          kesalahan: 'Tidak ada akhir yang jelas — "Ulangi jika perlu" dan "Selesai jika sudah" menyebabkan infinite loop'
+        },
+        {
+          judul: 'Algoritma Mencari Buku di Perpustakaan',
+          langkah: [
+            '1. Catat judul buku yang dicari',
+            '2. Tanyakan ke petugas letak kategori buku',
+            '3. Pergi ke rak sesuai kategori',
+            '4. Cari buku berdasarkan urutan abjad',
+            '5. Jika ketemu, ambil bukunya',
+            '6. Jika tidak ketemu, tanyakan ke petugas'
+          ],
+          salah: [
+            '1. Pergi ke perpustakaan',
+            '2. Cari buku',
+            '3. Ambil jika ada',
+            '4. Pulang'
+          ],
+          kesalahan: 'Tidak ada input yang jelas — judul buku tidak disebutkan, langkah terlalu umum dan tidak detail'
+        }
+      ],
       }
     },
     {
@@ -125,6 +156,36 @@ const isValidName = (name) => {
               { simbol: 'luas = panjang × lebar', jenis: 'Proses' },
               { simbol: 'OUTPUT luas', jenis: 'Output' },
               { simbol: 'END', jenis: 'Terminator' }
+            ], 
+            salah:[
+              {
+                langkah:[
+                  {simbol: 'INPUT panjang, lebar', jenis: 'Input'},
+                  {simbol: 'luas = panjang x lebar', jenis: 'Proses'},
+                  {simbol: 'OUTPUT luas',jenis: 'Output'},
+                  {simbol:'END', jenis: 'Terminator'}
+                ],
+                kesalahan:'❌ Tidak ada simbol START — flowchart harus selalu diawali dengan simbol Mulai/START'
+              },
+              {
+                langkah: [
+                  { simbol: 'START', jenis: 'Terminator' },
+                  { simbol: 'luas = panjang × lebar', jenis: 'Proses' },
+                  { simbol: 'OUTPUT luas', jenis: 'Output' },
+                  { simbol: 'END', jenis: 'Terminator' }
+                ],
+                kesalahan: '❌ Tidak ada simbol INPUT — data panjang dan lebar tidak dimasukkan terlebih dahulu'
+              },
+              {
+                langkah: [
+                  { simbol: 'START', jenis: 'Terminator' },
+                  { simbol: 'INPUT panjang, lebar', jenis: 'Input' },
+                  { simbol: 'OUTPUT luas', jenis: 'Output' },
+                  { simbol: 'luas = panjang × lebar', jenis: 'Proses' },
+                  { simbol: 'END', jenis: 'Terminator' }
+                ],
+                kesalahan: '❌ Urutan salah — OUTPUT tidak boleh sebelum PROSES, luas belum dihitung tapi sudah ditampilkan'
+              }
             ]
           },
           {
@@ -134,10 +195,43 @@ const isValidName = (name) => {
               { simbol: 'START', jenis: 'Terminator' },
               { simbol: 'INPUT bilangan', jenis: 'Input' },
               { simbol: 'bilangan % 2 == 0?', jenis: 'Keputusan' },
-              { simbol: 'Ya → OUTPUT "Genap', jenis: 'Output' },
-              { simbol: 'Tidak → OUTPUT "Ganjil', jenis: 'Output' },
+              { simbol: 'OUTPUT "Genap', jenis: 'Output' },
+              { simbol: 'OUTPUT "Ganjil', jenis: 'Output' },
               { simbol: 'END', jenis: 'Terminator' }
-            ]
+            ],
+            salah: [
+                  {
+                    langkah: [
+                      { simbol: 'START', jenis: 'Terminator' },
+                      { simbol: 'INPUT bilangan', jenis: 'Input' },
+                      { simbol: 'OUTPUT "Genap"', jenis: 'Output' },
+                      { simbol: 'OUTPUT "Ganjil"', jenis: 'Output' },
+                      { simbol: 'END', jenis: 'Terminator' }
+                    ],
+                    kesalahan: '❌ Tidak ada simbol Keputusan — tidak ada pengecekan kondisi apakah bilangan genap atau ganjil'
+                  },
+                  {
+                  langkah: [
+                    { simbol: 'START', jenis: 'Terminator' },
+                    { simbol: '???', jenis: 'Input' },
+                    { simbol: 'bilangan % 2 == 0?', jenis: 'Keputusan' },
+                    { simbol: 'OUTPUT "Genap"', jenis: 'Output' },
+                    { simbol: 'OUTPUT "Ganjil"', jenis: 'Output' },
+                    { simbol: 'END', jenis: 'Terminator' }
+                  ],
+                  kesalahan: '❌ Keterangan tidak jelas — simbol Input tidak memiliki keterangan data apa yang dimasukkan'
+                },
+                {
+                  langkah: [
+                    { simbol: 'START', jenis: 'Terminator' },
+                    { simbol: 'INPUT bilangan', jenis: 'Input' },
+                    { simbol: 'bilangan % 2 == 0?', jenis: 'Keputusan' },
+                    { simbol: 'OUTPUT "Genap"', jenis: 'Output' },
+                    { simbol: 'OUTPUT "Ganjil"', jenis: 'Output' },
+                  ],
+                  kesalahan: '❌ Tidak ada simbol END — flowchart harus selalu diakhiri dengan simbol Selesai/END'
+                }
+              ]
           }
         ]
       }
@@ -156,7 +250,7 @@ const isValidName = (name) => {
   const problemSets = [
     // MUDAH
     {
-      id: 1, title: 'Menghitung Luas Segitiga', level: 'Mudah',
+      id: 1, icon: '📐',title: 'Menghitung Luas Segitiga', level: 'Mudah',
       description: 'Buatlah algoritma untuk menghitung luas segitiga. Program menerima input alas dan tinggi, kemudian menghitung dan menampilkan luas segitiga.',
       hints: ['Data apa yang diperlukan untuk menghitung luas segitiga?', 'Apa rumus luas segitiga?', 'Hasil apa yang harus ditampilkan?'],
       expectedFlow: ['start', 'input', 'process', 'output', 'end'], needsDecision: false,
@@ -165,7 +259,7 @@ const isValidName = (name) => {
       outputOptions: ['luas segitiga', 'keliling segitiga', 'volume segitiga', 'tinggi segitiga'], correctOutputs: ['luas segitiga']
     },
     {
-      id: 2, title: 'Konversi Suhu Celsius ke Fahrenheit', level: 'Mudah',
+      id: 2, icon: '🌡️',title: 'Konversi Suhu Celsius ke Fahrenheit', level: 'Mudah',
       description: 'Buatlah algoritma untuk mengkonversi suhu dari Celsius ke Fahrenheit.',
       hints: ['Apa input yang diperlukan?', 'Bagaimana rumus konversi Celsius ke Fahrenheit?', 'Apa yang harus ditampilkan sebagai output?'],
       expectedFlow: ['start', 'input', 'process', 'output', 'end'], needsDecision: false,
@@ -174,7 +268,7 @@ const isValidName = (name) => {
       outputOptions: ['fahrenheit', 'celsius', 'kelvin', 'suhu'], correctOutputs: ['fahrenheit']
     },
     {
-      id: 3, title: 'Menentukan Bilangan Positif atau Negatif', level: 'Mudah',
+      id: 3,icon: '🔢',title: 'Menentukan Bilangan Positif atau Negatif', level: 'Mudah',
       description: 'Buatlah algoritma untuk menentukan apakah sebuah bilangan positif, negatif, atau nol.',
       hints: ['Berapa kondisi yang perlu dicek?', 'Bagaimana membedakan bilangan positif, negatif, dan nol?', 'Percabangan seperti apa yang dibutuhkan?'],
       expectedFlow: ['start', 'input', 'decision', 'output', 'end'], needsDecision: true,
@@ -184,7 +278,7 @@ const isValidName = (name) => {
     },
     // SEDANG
     {
-      id: 4, title: 'Menentukan Nilai Maksimum dari 2 Bilangan', level: 'Sedang',
+      id: 4, icon: '➕',title: 'Menentukan Nilai Maksimum dari 2 Bilangan', level: 'Sedang',
       description: 'Buatlah algoritma untuk menentukan bilangan terbesar dari dua bilangan yang diinputkan.',
       hints: ['Berapa bilangan yang perlu dibandingkan?', 'Bagaimana cara membandingkan dua bilangan?', 'Apa output yang diharapkan?'],
       expectedFlow: ['start', 'input', 'decision', 'output', 'end'], needsDecision: true,
@@ -193,7 +287,7 @@ const isValidName = (name) => {
       outputOptions: ['bilangan maksimum', 'bilangan minimum', 'hasil', 'nilai terbesar'], correctOutputs: ['bilangan maksimum', 'nilai terbesar']
     },
     {
-      id: 5, title: 'Menghitung Total Belanja dan Diskon', level: 'Sedang',
+      id: 5, icon: '🛒',title: 'Menghitung Total Belanja dan Diskon', level: 'Sedang',
       description: 'Buatlah algoritma untuk menghitung total belanja. Jika total belanja lebih dari 100000, dapat diskon 10%.',
       hints: ['Apa yang perlu diinput?', 'Kapan diskon diberikan?', 'Bagaimana cara menghitung total setelah diskon?'],
       expectedFlow: ['start', 'input', 'decision', 'process', 'output', 'end'], needsDecision: true,
@@ -202,7 +296,7 @@ const isValidName = (name) => {
       outputOptions: ['total bayar', 'harga total', 'diskon', 'harga barang'], correctOutputs: ['total bayar', 'harga total']
     },
     {
-      id: 6, title: 'Menghitung Nilai Akhir Siswa', level: 'Sedang',
+      id: 6,icon: '📝', title: 'Menghitung Nilai Akhir Siswa', level: 'Sedang',
       description: 'Buatlah algoritma untuk menghitung nilai akhir siswa. Nilai akhir = (UTS × 30%) + (UAS × 40%) + (Tugas × 30%). Tentukan juga status kelulusan (lulus jika >= 60).',
       hints: ['Berapa komponen nilai yang perlu diinput?', 'Bagaimana cara menghitung nilai akhir dengan bobot?', 'Kapan siswa dinyatakan lulus?'],
       expectedFlow: ['start', 'input', 'process', 'decision', 'output', 'end'], needsDecision: true,
@@ -212,7 +306,7 @@ const isValidName = (name) => {
     },
     // SULIT
     {
-      id: 7, title: 'Menentukan Tahun Kabisat', level: 'Sulit',
+      id: 7, icon: '📅',title: 'Menentukan Tahun Kabisat', level: 'Sulit',
       description: 'Buatlah algoritma untuk menentukan apakah suatu tahun adalah tahun kabisat.',
       hints: ['Apa syarat tahun kabisat?', 'Berapa kondisi yang harus dicek?', 'Bagaimana urutan pengecekan kondisi?'],
       expectedFlow: ['start', 'input', 'decision', 'output', 'end'], needsDecision: true,
@@ -221,22 +315,39 @@ const isValidName = (name) => {
       outputOptions: ['status kabisat', 'tahun kabisat', 'jumlah hari', 'nama bulan'], correctOutputs: ['status kabisat', 'tahun kabisat']
     },
     {
-      id: 8, title: 'Menghitung Tarif Parkir', level: 'Sulit',
-      description: 'Buatlah algoritma untuk menghitung tarif parkir. Tarif: 2 jam pertama Rp5000, setiap jam berikutnya Rp2000.',
-      hints: ['Berapa tarif untuk 2 jam pertama?', 'Bagaimana menghitung jam tambahan?', 'Bagaimana struktur percabangannya?'],
-      expectedFlow: ['start', 'input', 'decision', 'process', 'output', 'end'], needsDecision: true,
-      inputOptions: ['lama parkir', 'jam masuk', 'jam keluar', 'nomor plat'], correctInputs: ['lama parkir'],
-      processKeywords: ['2', 'jam', '5000', '2000', 'tarif', 'jika'],
-      outputOptions: ['total tarif', 'tarif parkir', 'jam parkir', 'waktu parkir'], correctOutputs: ['total tarif', 'tarif parkir']
-    },
+      id: 8, icon: '🅿️',title: 'Menghitung Tarif Parkir', level: 'Sulit',
+       description: 'Buatlah algoritma untuk menghitung tarif parkir. Tarif: 2 jam pertama Rp5000, setiap jam berikutnya Rp2000.',
+        hints: [
+          'Berapa tarif untuk 2 jam pertama?',
+          'Bagaimana menghitung jam tambahan?',
+          'Bagaimana struktur percabangannya?'
+        ],
+        expectedFlow: ['start', 'input', 'decision', 'process', 'output', 'end'],
+        needsDecision: true,
+        minDecision: 2,
+        inputOptions: ['lama parkir', 'jam masuk', 'jam keluar', 'nomor plat'],
+        correctInputs: ['lama parkir'],
+        processKeywords: ['2', 'jam', '5000', '2000', 'tarif', 'jika'],
+        outputOptions: ['total tarif', 'tarif parkir', 'jam parkir', 'waktu parkir', 'nomor plat', 'jam masuk','jam keluar'],
+        correctOutputs: ['total tarif', 'tarif parkir']
+      },
     {
-      id: 9, title: 'Menentukan Kategori Nilai Siswa', level: 'Sulit',
-      description: 'Buatlah algoritma untuk menentukan kategori nilai siswa. Ketentuan: Nilai > 85 = "A", nilai 70-84 = "B", nilai < 60 = "D".',
-      hints: ['Berapa kategori nilai yang ada?', 'Bagaimana urutan pengecekan kondisi dari yang tertinggi?', 'Bagaimana menangani rentang nilai?'],
-      expectedFlow: ['start', 'input', 'decision', 'output', 'end'], needsDecision: true,
-      inputOptions: ['nilai akhir', 'nama siswa', 'kelas', 'absen'], correctInputs: ['nilai akhir'],
-      processKeywords: ['85', '70', '60', 'kategori', 'A', 'B', 'D', 'jika'],
-      outputOptions: ['kategori nilai', 'grade', 'huruf mutu', 'nilai akhir'], correctOutputs: ['kategori nilai', 'grade', 'huruf mutu']
+      id: 9, icon: '🏆',title: 'Menentukan Kategori Nilai Siswa', level: 'Sulit',
+      description: 'Buatlah algoritma untuk menghitung nilai akhir siswa dan menentukan kategori serta status kelulusan. Nilai akhir = (UTS × 30%) + (UAS × 40%) + (Tugas × 30%). Kategori: nilai > 85 = "A", nilai 70-84 = "B", nilai 60-69 = "C", nilai < 60 = "D". Status: lulus jika nilai akhir ≥ 60.',
+      hints: [
+        'Apa saja komponen nilai yang perlu diinput?',
+        'Bagaimana rumus menghitung nilai akhir dengan bobot?',
+        'Bagaimana urutan pengecekan kategori dari yang tertinggi?',
+        'Kapan siswa dinyatakan lulus?'
+      ],
+      expectedFlow: ['start', 'input', 'process', 'decision', 'output', 'end'],
+      needsDecision: true,
+      minDecision: 3,
+      inputOptions: ['UTS', 'UAS', 'Tugas', 'nama siswa', 'kelas', 'absen'],
+      correctInputs: ['UTS', 'UAS', 'Tugas'],
+      processKeywords: ['30', '40', 'nilai', 'akhir', '85', '70', '60', 'kategori', 'lulus'],
+      outputOptions: ['nilai akhir', 'kategori nilai', 'status kelulusan', 'nama siswa','kelas','nilai akhir','jumlah nilai'],
+      correctOutputs: ['nilai akhir', 'kategori nilai', 'status kelulusan']
     }
   ];
 
@@ -311,7 +422,8 @@ const handleDragOver = (e) => e.preventDefault();
   const initializeWorkspace = (index) => {
     setCurrentProblemIndex(index);
     setAnalysis({ selectedInputs: [], processText: '', selectedOutputs: [] });
-    setFlowchart(new Array(6).fill(null));
+    const problem = problemSets[index];
+    setFlowchart(new Array(problem?.level === 'Sulit' ? 8 : 6).fill(null));
     setSimulationResult(null);
     setShowFeedback(false);
   };
@@ -433,8 +545,16 @@ const handleDragOver = (e) => e.preventDefault();
 
     // VALIDASI 6: DECISION
     if (currentProblem.needsDecision) {
-      if (hasDecision) { score += 10; feedback.push('✅ Flowchart memiliki simbol Keputusan (diperlukan untuk soal ini)'); }
-      else errors.push('❌ Soal ini membutuhkan percabangan, flowchart harus ada simbol Keputusan');
+    const decisionCount = symbolIds.filter(id => id === 'decision').length;
+      const minDecision = currentProblem.minDecision || 1;
+
+      if (decisionCount >= minDecision) {
+        score += 10;
+        feedback.push(`✅ Flowchart memiliki ${decisionCount} simbol Keputusan`);
+      } else {
+        errors.push(`❌ Soal ini membutuhkan minimal ${minDecision} simbol Keputusan`);
+      }
+
     } else {
       if (hasDecision) { errors.push('❌ Simbol Keputusan tidak diperlukan untuk soal ini'); score -= 5; }
       else feedback.push('✅ Tidak menggunakan simbol Keputusan (sudah tepat)');
@@ -578,10 +698,10 @@ const handleDragOver = (e) => e.preventDefault();
                           }`}
                       >
                         <div className="flex items-center justify-between mb-3">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold
-                            ${!unlocked ? 'bg-gray-300 text-gray-500' : 'bg-indigo-600 text-white'}`}>
-                            {!unlocked ? '🔒' : problem.id}
-                          </div>
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl
+                          ${!unlocked ? 'bg-gray-100' : 'bg-indigo-50'}`}>
+                          {!unlocked ? '🔒' : problem.icon}
+                        </div>
                           <span className={`px-3 py-1 rounded-full text-xs font-bold ${c.badge}`}>
                             {problem.level}
                           </span>
@@ -607,22 +727,19 @@ const handleDragOver = (e) => e.preventDefault();
             </div>
           );
         })}
-
-        {/* Info Sistem */}
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-          <p className="text-sm text-blue-900">
-            <strong>🔓 Sistem Buka Level:</strong> Selesaikan minimal <strong>2 soal Mudah</strong> (skor ≥ 60) untuk membuka level Sedang.
-            Selesaikan minimal <strong>2 soal Sedang</strong> untuk membuka level Sulit.
-          </p>
         </div>
-      </div>
     );
   };
 
   // POPUP NAMA - taruh sebelum return utama
 if (showNamePopup) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/background.jpg)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
       <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border-4 border-indigo-300">
         
         {/* Header Popup */}
@@ -637,7 +754,7 @@ if (showNamePopup) {
         {/* Form Nama */}
         <div className="mb-6">
           <label className="block font-bold text-gray-700 mb-2 text-lg">
-            👤 Masukkan Nama Kamu:
+            👤 Masukkan Nama:
           </label>
           <input
             type="text"
@@ -654,9 +771,6 @@ if (showNamePopup) {
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-indigo-500 text-lg"
             autoFocus
           />
-          <p className="text-xs text-gray-400 mt-2">
-            * Nama akan digunakan untuk menyimpan hasil belajar kamu
-          </p>
         </div>
 
 
@@ -685,7 +799,38 @@ if (showNamePopup) {
 }
 
           return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+            <div className="min-h-screen relative overflow-hidden"
+  style={{ backgroundColor: '#eef2ff' }}>
+  
+  {/* Dekorasi shape flowchart di background */}
+  <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+    
+  {/* Oval/Terminator - pojok kiri atas */}
+  <div style={{ position: 'absolute', top: '2%', left: '-2%', width: '120px', height: '60px', borderRadius: '50%', border: '3px solid #818cf8', opacity: 0.08 }}></div>
+  
+  {/* Persegi Proses - pojok kanan atas */}
+  <div style={{ position: 'absolute', top: '5%', right: '-1%', width: '100px', height: '70px', border: '3px solid #818cf8', opacity: 0.08 }}></div>
+
+  {/* Belah Ketupat - pojok kiri tengah */}
+  <div style={{ position: 'absolute', top: '45%', left: '-2%', width: '80px', height: '80px', border: '3px solid #818cf8', opacity: 0.08, transform: 'rotate(45deg)' }}></div>
+
+  {/* Jajar genjang - pojok kanan bawah */}
+  <div style={{ position: 'absolute', bottom: '10%', right: '-1%', width: '110px', height: '55px', border: '3px solid #818cf8', opacity: 0.08, transform: 'skewX(-15deg)' }}></div>
+
+  {/* Oval besar - pojok kiri bawah */}
+  <div style={{ position: 'absolute', bottom: '2%', left: '-2%', width: '150px', height: '75px', borderRadius: '50%', border: '3px solid #818cf8', opacity: 0.07 }}></div>
+
+  {/* Belah ketupat kecil - pojok kanan tengah */}
+  <div style={{ position: 'absolute', top: '50%', right: '-1%', width: '60px', height: '60px', border: '3px solid #818cf8', opacity: 0.07, transform: 'rotate(45deg)' }}></div>
+
+  {/* Garis penghubung kiri */}
+  <div style={{ position: 'absolute', top: '8%', left: '1%', width: '2px', height: '80px', backgroundColor: '#818cf8', opacity: 0.08 }}></div>
+  
+  {/* Garis penghubung kanan */}
+  <div style={{ position: 'absolute', bottom: '15%', right: '1%', width: '2px', height: '70px', backgroundColor: '#818cf8', opacity: 0.08 }}></div>
+
+</div>
+
               {/* Header */}
               <div className="bg-white shadow-md border-b-4 border-indigo-500">
                 <div className="max-w-7xl mx-auto px-6 py-4">
@@ -761,9 +906,21 @@ if (showNamePopup) {
                       <ChevronRight size={20} className="text-gray-400" />
                     </button>
                   ))}
-                </div>
+
+              </div>
+              {/* ← TAMBAHKAN DI SINI */}
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="text-xs text-gray-500 mb-2">📄 Materi Lengkap:</p>
+                <button
+                  onClick={() => window.open(process.env.PUBLIC_URL + '/MATERI-ALGORITMA.pdf', '_blank')}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold text-sm transition-all"
+                >
+                  📥 Download Materi PDF
+                </button>
+              </div>
               </div>
             </div>
+
             <div className="md:col-span-2">
               {selectedMateri ? (
                 <div className="bg-white rounded-xl shadow-lg p-8">
@@ -771,9 +928,38 @@ if (showNamePopup) {
                     <span className="text-5xl">{selectedMateri.icon}</span>
                     <h2 className="text-3xl font-bold text-gray-800">{selectedMateri.title}</h2>
                   </div>
+                                    {/* GIF Flowchart - hanya di materi id 2 */}
+                    {selectedMateri.id === 2 && (
+                      <div className="flex flex-col items-center my-6">
+                        <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 w-full">
+                          <p className="font-bold text-blue-800 text-center mb-3">
+                            Ilustrasi Cara Kerja Flowchart:
+                          </p>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/flowchart.gif`}
+                            alt="Ilustrasi Flowchart"
+                            className="w-full rounded-lg shadow-md"
+                          />
+                        </div>
+                      </div>
+                    )}
                   {selectedMateri.content.intro && (
                     <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
-                      <p className="text-gray-700 leading-relaxed">{selectedMateri.content.intro}</p>
+                      <p className="text-gray-700 leading-relaxed text-justify">{selectedMateri.content.intro}</p>
+                    </div>
+                  )}
+
+                  {selectedMateri.id === 1 && (
+                    <div className="flex flex-col items-center mb-6">
+                      <img 
+                        src={`${process.env.PUBLIC_URL}/al-khawarizmi.png`} 
+                        alt="Al-Khawarizmi - Penemu Algoritma"
+                        className="w-48 h-48 object-cover rounded-xl shadow-lg border-4 border-indigo-200"
+                      />
+                      <p className="text-sm text-gray-500 mt-2 italic text-center">
+                        Abu Ja'far Muhammad bin Musa Al-Khawarizmi<br/>
+                        <span className="text-xs">(Matematikawan Persia, penemu konsep Algoritma)</span>
+                      </p>
                     </div>
                   )}
                   {selectedMateri.content.pengertian && selectedMateri.id === 1 && (
@@ -781,32 +967,112 @@ if (showNamePopup) {
                       {selectedMateri.content.pengertian.map((item, idx) => (
                         <div key={idx} className="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-lg border border-purple-200">
                           <h3 className="font-bold text-lg text-purple-900 mb-2">{item.judul}</h3>
-                          <p className="text-gray-700">{item.penjelasan}</p>
+                          <p className="text-gray-700 text-justify">{item.penjelasan}</p>
                         </div>
                       ))}
                     </div>
                   )}
                   {selectedMateri.content.ciri && (
                     <div className="mb-6">
-                      <h3 className="font-bold text-xl text-gray-800 mb-3">Ciri-ciri Algoritma yang Baik:</h3>
-                      <div className="space-y-2">
-                        {selectedMateri.content.ciri.map((ciri, idx) => (
-                          <div key={idx} className="flex items-start gap-3 bg-gray-50 p-3 rounded-lg">
-                            <div className="bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-sm">{idx + 1}</div>
-                            <p className="text-gray-700">{ciri}</p>
+                      {/* Ciri BAIK dan TIDAK BAIK berdampingan */}
+                      <div className="grid md:grid-cols-2 gap-4 mb-4">
+                        
+                        {/* Ciri Baik */}
+                        <div>
+                          <h3 className="font-bold text-lg text-green-800 mb-3 flex items-center gap-2">
+                            ✅ Ciri-ciri Algoritma yang Baik:
+                          </h3>
+                          <div className="space-y-2">
+                            {selectedMateri.content.ciri.map((ciri, idx) => (
+                              <div key={idx} className="flex items-start gap-3 bg-green-50 border border-green-200 p-3 rounded-lg">
+                                <div className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs">{idx + 1}</div>
+                                <p className="text-gray-700 text-sm text-justify">{ciri}</p>
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        </div>
+
+                        {/* Ciri Tidak Baik */}
+                        {selectedMateri.content.ciriTidakBaik && (
+                          <div>
+                            <h3 className="font-bold text-lg text-red-800 mb-3 flex items-center gap-2">
+                              ❌ Ciri-ciri Algoritma yang Tidak Baik:
+                            </h3>
+                            <div className="space-y-2">
+                              {selectedMateri.content.ciriTidakBaik.map((ciri, idx) => (
+                                <div key={idx} className="flex items-start gap-3 bg-red-50 border border-red-200 p-3 rounded-lg">
+                                  <div className="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs">{idx + 1}</div>
+                                  <p className="text-gray-700 text-sm text-justify">{ciri}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {/* GIF Algoritma - antara ciri dan contoh */}
+                  {selectedMateri.id === 1 && (
+                    <div className="flex flex-col items-center my-6">
+                      <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-4 w-full">
+                        <p className="font-bold text-indigo-800 text-center mb-3">
+                          Ilustrasi Cara Kerja Algoritma:
+                        </p>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/algoritma.gif`}
+                          alt="Ilustrasi Algoritma"
+                          className="w-full rounded-lg shadow-md"
+                        />
                       </div>
                     </div>
                   )}
                   {selectedMateri.content.contoh && (
                     <div>
                       <h3 className="font-bold text-xl text-gray-800 mb-4">💡 Contoh Algoritma:</h3>
-                      <div className="space-y-5">
+                      <div className="space-y-6">
                         {selectedMateri.content.contoh.map((contoh, idx) => (
-                          <div key={idx} className="bg-green-50 border-2 border-green-200 p-5 rounded-lg">
-                            <h4 className="font-bold text-lg text-green-900 mb-3">{contoh.judul}</h4>
-                            <div className="space-y-1">{contoh.langkah.map((l, i) => <p key={i} className="text-gray-700 pl-2">{l}</p>)}</div>
+                          <div key={idx}>
+                            <h4 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
+                              <span className="bg-indigo-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm">{idx + 1}</span>
+                              {contoh.judul}
+                            </h4>
+                            
+                            {/* Benar dan Salah berdampingan */}
+                            <div className="grid md:grid-cols-2 gap-4">
+                              
+                              {/* Algoritma BENAR */}
+                              <div className="bg-green-50 border-2 border-green-300 p-4 rounded-lg">
+                                <p className="font-bold text-green-800 mb-2 flex items-center gap-1">
+                                  ✅ Algoritma yang Benar:
+                                </p>
+                                <div className="space-y-1">
+                                  {contoh.langkah.map((l, i) => (
+                                    <p key={i} className="text-gray-700 text-sm pl-2 text-justify">{l}</p>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Algoritma SALAH */}
+                              {contoh.salah && (
+                                <div className="bg-red-50 border-2 border-red-300 p-4 rounded-lg">
+                                  <p className="font-bold text-red-800 mb-2 flex items-center gap-1">
+                                    ❌ Algoritma yang Salah:
+                                  </p>
+                                  <div className="space-y-1">
+                                    {contoh.salah.map((l, i) => (
+                                      <p key={i} className="text-gray-700 text-sm pl-2 text-justify">{l}</p>
+                                    ))}
+                                  </div>
+                                  {contoh.kesalahan && (
+                                    <div className="mt-3 bg-red-100 border-l-4 border-red-500 p-2 rounded">
+                                      <p className="text-xs text-red-800 font-semibold text-justify">
+                                        ⚠️ Kesalahan: {contoh.kesalahan}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -841,7 +1107,7 @@ if (showNamePopup) {
                               </div>
                               <div className="flex-1">
                                 <h4 className="font-bold text-gray-800 mb-1">{symbol.name}</h4>
-                                <p className="text-sm text-gray-700 mb-2">{symbol.desc}</p>
+                                <p className="text-sm text-gray-700 mb-2 text-justify">{symbol.desc}</p>
                                 <div className="bg-white p-2 rounded border-l-4 border-gray-600">
                                   <p className="text-xs text-gray-600"><strong>Contoh:</strong> {symbol.contoh}</p>
                                 </div>
@@ -855,88 +1121,184 @@ if (showNamePopup) {
                   {selectedMateri.content.contohFlowchart && (
                     <div>
                       <h3 className="font-bold text-xl text-gray-800 mb-4">📊 Contoh Flowchart:</h3>
-                      <div className="space-y-6">
+                      <div className="space-y-8">
                         {selectedMateri.content.contohFlowchart.map((fc, idx) => (
                           <div key={idx} className="bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-200 p-6 rounded-lg">
                             <h4 className="font-bold text-lg text-cyan-900 mb-2">{fc.judul}</h4>
                             <p className="text-sm text-gray-600 mb-4">{fc.deskripsi}</p>
-                            <div className="flex flex-col items-center gap-3 bg-white p-4 rounded-lg">
-                              {fc.langkah.map((step, i) => (
-                                <div key={i} className="flex flex-col items-center">
-                                  <div className="flex flex-col items-center">
-                                    {/* TERMINATOR - oval/pill */}
-                                    {step.jenis === 'Terminator' && (
-                                  <div className="px-8 py-2 bg-green-100 border-2 border-green-400 rounded-full font-semibold text-sm text-center min-w-[160px]">
-                                    {step.simbol}
+
+                            {/* Benar dan Salah berdampingan */}
+                            <div className="grid md:grid-cols-2 gap-4">
+                              
+                              {/* Flowchart BENAR */}
+                              <div className="bg-green-50 border-2 border-green-300 rounded-lg p-4">
+                                <p className="font-bold text-green-800 mb-3 text-center">✅ Flowchart yang Benar</p>
+                                <div className="flex flex-col items-center bg-white p-4 rounded-lg overflow-x-auto">
+                                  {fc.langkah.map((step, i) => {
+                                    const decisionIndex = fc.langkah.findIndex(s => s.jenis === 'Keputusan');
+                                    const hasDecision = decisionIndex !== -1;
+                                    if (hasDecision && i > decisionIndex) return null;
+                                    return (
+                                      <div key={i} className="flex flex-col items-center w-full">
+                                        <div className="flex justify-center">
+                                          {step.jenis === 'Terminator' && (
+                                            <div className="px-6 py-2 bg-green-100 border-2 border-green-400 rounded-full font-semibold text-xs text-center min-w-[140px]">
+                                              {step.simbol}
+                                            </div>
+                                          )}
+                                          {(step.jenis === 'Input' || step.jenis === 'Output') && (
+                                            <div className="px-4 py-2 bg-yellow-100 border-2 border-yellow-400 font-semibold text-xs text-center min-w-[140px]"
+                                              style={{ clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)' }}>
+                                              {step.simbol}
+                                            </div>
+                                          )}
+                                          {step.jenis === 'Proses' && (
+                                            <div className="px-4 py-2 bg-blue-100 border-2 border-blue-400 font-semibold text-xs text-center min-w-[140px]">
+                                              {step.simbol}
+                                            </div>
+                                          )}
+                                          {step.jenis === 'Keputusan' && (
+                                            <div className="flex items-center justify-center bg-red-100 border-2 border-red-400 font-semibold text-xs text-center"
+                                              style={{ width: '140px', height: '70px', clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
+                                              {step.simbol}
+                                            </div>
+                                          )}
+                                        </div>
+
+                                        {/* Cabang Ya/Tidak */}
+                                        {step.jenis === 'Keputusan' && (
+                                          <div className="w-full mt-1">
+                                            <div className="flex items-center justify-center relative" style={{ height: '40px' }}>
+                                              <div style={{ position: 'absolute', left: '25%', right: '25%', top: '50%', height: '2px', backgroundColor: '#9ca3af', transform: 'translateY(-50%)' }}></div>
+                                              <div style={{ position: 'absolute', left: '50%', top: '0', width: '2px', height: '100%', backgroundColor: '#9ca3af', transform: 'translateX(-50%)' }}></div>
+                                              <span className="absolute text-xs font-bold text-green-700 bg-white px-1" style={{ left: '50%', top: '55%', transform: 'translateX(-50%)' }}>Ya</span>
+                                              <span className="absolute text-xs font-bold text-red-700 bg-white px-1" style={{ right: '18%', top: '20%' }}>Tidak</span>
+                                            </div>
+                                            <div className="flex items-start justify-between px-4 gap-4">
+                                              <div className="flex-1 flex flex-col items-center">
+                                                {fc.langkah[decisionIndex + 1] && (
+                                                  <div className="px-3 py-2 bg-yellow-100 border-2 border-yellow-400 font-semibold text-xs text-center w-full"
+                                                    style={{ clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)' }}>
+                                                    {fc.langkah[decisionIndex + 1].simbol}
+                                                  </div>
+                                                )}
+                                              </div>
+                                              <div className="flex-1 flex flex-col items-center">
+                                                {fc.langkah[decisionIndex + 2] && (
+                                                  <div className="px-3 py-2 bg-yellow-100 border-2 border-yellow-400 font-semibold text-xs text-center w-full"
+                                                    style={{ clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)' }}>
+                                                    {fc.langkah[decisionIndex + 2].simbol}
+                                                  </div>
+                                                )}
+                                              </div>
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '8px' }}>
+                                              <div style={{ width: '2px', height: '10px', backgroundColor: '#9ca3af' }}></div>
+                                              <div style={{ width: '0', height: '0', borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '12px solid #9ca3af' }}></div>
+                                            </div>
+                                            {fc.langkah[fc.langkah.length - 1].jenis === 'Terminator' && (
+                                              <div className="flex justify-center mt-1">
+                                                <div className="px-6 py-2 bg-green-100 border-2 border-green-400 rounded-full font-semibold text-xs text-center min-w-[140px]">
+                                                  {fc.langkah[fc.langkah.length - 1].simbol}
+                                                </div>
+                                              </div>
+                                            )}
+                                          </div>
+                                        )}
+
+                                        {/* Panah normal */}
+                                        {step.jenis !== 'Keputusan' &&
+                                        i < fc.langkah.length - 1 &&
+                                        !(fc.langkah.some(s => s.jenis === 'Keputusan') && i >= fc.langkah.findIndex(s => s.jenis === 'Keputusan')) && (
+                                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <div style={{ width: '2px', height: '10px', backgroundColor: '#9ca3af' }}></div>
+                                            <div style={{ width: '0', height: '0', borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '12px solid #9ca3af' }}></div>
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+
+                              {/* Flowchart SALAH */}
+                              {fc.salah && (
+                                <div className="bg-red-50 border-2 border-red-300 rounded-lg p-4">
+                                  <p className="font-bold text-red-800 mb-3 text-center">❌ Contoh Flowchart yang Salah</p>
+                                  <div className="space-y-4">
+                                    {fc.salah.map((salahItem, sIdx) => (
+                                      <div key={sIdx} className="bg-white border border-red-200 rounded-lg p-3">
+                                        <p className="text-xs font-bold text-gray-600 mb-2">Kesalahan {sIdx + 1}:</p>
+                                        {/* Render flowchart salah */}
+                                        <div className="flex flex-col items-center">
+                                          {salahItem.langkah.map((step, i) => (
+                                            <div key={i} className="flex flex-col items-center">
+                                              {step.jenis === 'Terminator' && (
+                                                <div className="px-4 py-1 bg-green-100 border-2 border-green-400 rounded-full font-semibold text-xs text-center min-w-[120px]">
+                                                  {step.simbol}
+                                                </div>
+                                              )}
+                                              {(step.jenis === 'Input' || step.jenis === 'Output') && (
+                                                <div className="px-3 py-1 bg-yellow-100 border-2 border-yellow-400 font-semibold text-xs text-center min-w-[120px]"
+                                                  style={{ clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)' }}>
+                                                  {step.simbol}
+                                                </div>
+                                              )}
+                                              {step.jenis === 'Proses' && (
+                                                <div className="px-3 py-1 bg-blue-100 border-2 border-blue-400 font-semibold text-xs text-center min-w-[120px]">
+                                                  {step.simbol}
+                                                </div>
+                                              )}
+                                              {step.jenis === 'Keputusan' && (
+                                                <div className="flex items-center justify-center bg-red-100 border-2 border-red-400 font-semibold text-xs text-center"
+                                                  style={{ width: '120px', height: '60px', clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
+                                                  {step.simbol}
+                                                </div>
+                                              )}
+                                              {i < salahItem.langkah.length - 1 && (
+                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                  <div style={{ width: '2px', height: '8px', backgroundColor: '#9ca3af' }}></div>
+                                                  <div style={{ width: '0', height: '0', borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '8px solid #9ca3af' }}></div>
+                                                </div>
+                                              )}
+                                            </div>
+                                          ))}
+                                        </div>
+                                        {/* Keterangan kesalahan */}
+                                        <div className="mt-2 bg-red-100 border-l-4 border-red-500 p-2 rounded">
+                                          <p className="text-xs text-red-800 font-semibold text-justify">{salahItem.kesalahan}</p>
+                                        </div>
+                                      </div>
+                                    ))}
                                   </div>
-                                   )}
-
-                                  {/* INPUT/OUTPUT - jajar genjang */}
-                                  {(step.jenis === 'Input' || step.jenis === 'Output') && (
-                                <div className="relative px-6 py-2 bg-yellow-100 border-2 border-yellow-400 font-semibold text-sm text-center min-w-[160px]"
-                                  style={{ clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)' }}>
-                                  {step.simbol}
                                 </div>
-                                 )}
-
-                                  {/* PROSES - persegi panjang */}
-                                   {step.jenis === 'Proses' && (
-                                <div className="px-6 py-2 bg-blue-100 border-2 border-blue-400 font-semibold text-sm text-center min-w-[160px]">
-                                  {step.simbol}
-                                </div>
-                                )}
-
-                                {/* KEPUTUSAN - belah ketupat */}
-                                {step.jenis === 'Keputusan' && (
-                                <div className="relative flex items-center justify-center bg-red-100 border-2 border-red-400 font-semibold text-sm text-center"
-                                style={{ 
-                                        width: '180px', 
-                                         height: '80px',
-                                        clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
-                                     }}>
-                                  {step.simbol}
-                                  </div>
-                                 )}
-                                </div>
-                                  {i < fc.langkah.length - 1 && (
-  <div style={{ 
-    display: 'flex', 
-    flexDirection: 'column', 
-    alignItems: 'center',
-    gap: '0px',
-    lineHeight: '0'
-  }}>
-    <div style={{ 
-      width: '2px', 
-      height: '20px', 
-      backgroundColor: '#9ca3af',
-    }}></div>
-    <div style={{
-      width: '0',
-      height: '0',
-      borderLeft: '12px solid transparent',
-      borderRight: '12px solid transparent',
-      borderTop: '17px solid #9ca3af',
-    }}></div>
-  </div>
-)}
-                                </div>
-                              ))}
+                              )}
                             </div>
                           </div>
                         ))}
                       </div>
                     </div>
-                  )}
-                </div>
+                  )}                          
+                  </div>
+                  
+
+            
+
               ) : (
-                <div className="bg-white rounded-xl shadow-lg p-12 text-center">
-                  <BookOpen size={64} className="mx-auto text-gray-300 mb-4" />
-                  <p className="text-gray-500 text-lg">Pilih materi dari daftar untuk mulai belajar</p>
+                <div className="space-y-3">
+                <div className="flex items-start gap-3 bg-indigo-50 p-3 rounded-lg">
+                  <span className="text-indigo-600 font-bold flex-shrink-0">1.2</span>
+                  <p className="text-gray-700 text-sm text-justify">Memahami konsep struktur data dan algoritma standar.</p>
                 </div>
+                <div className="flex items-start gap-3 bg-indigo-50 p-3 rounded-lg">
+                  <span className="text-indigo-600 font-bold flex-shrink-0">1.4</span>
+                  <p className="text-gray-700 text-sm text-justify">Menerapkan struktur data dan algoritma standar untuk menghasilkan berbagai solusi dalam menyelesaikan persoalan yang mengandung himpunan data berstruktur kompleks dengan volume tidak kecil.</p>
+                </div>
+              </div>
               )}
             </div>
           </div>
+          
         ) : (
           /* ========== TAB WORKSPACE ========== */
           <div className="space-y-6">
@@ -965,6 +1327,8 @@ if (showNamePopup) {
                 </div>
               )}
             </div>
+
+            
 
             {!currentProblem ? (
               /* ===== DAFTAR SOAL ===== */
@@ -1016,7 +1380,7 @@ if (showNamePopup) {
                     {/* Tombol navigasi */}
                     <div className="flex gap-2 flex-shrink-0">
                       <button onClick={() => setCurrentProblemIndex(null)}
-                        className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 font-semibold text-xs flex items-center gap-1">
+                        className="px-3 py-1.5 bg-green-100 hover:bg-green-200 rounded-lg text-white-700 font-semibold text-xs flex items-center gap-1">
                         📋 Daftar
                       </button>
                       {hasNextProblem() && (
