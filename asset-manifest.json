@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/AlgoFlow/static/css/main.8aef75d4.css",
-    "main.js": "/AlgoFlow/static/js/main.2ddb3136.js",
+    "main.css": "/AlgoFlow/static/css/main.f1797c70.css",
+    "main.js": "/AlgoFlow/static/js/main.c80beecc.js",
     "static/js/453.79443422.chunk.js": "/AlgoFlow/static/js/453.79443422.chunk.js",
     "index.html": "/AlgoFlow/index.html",
-    "main.8aef75d4.css.map": "/AlgoFlow/static/css/main.8aef75d4.css.map",
-    "main.2ddb3136.js.map": "/AlgoFlow/static/js/main.2ddb3136.js.map",
+    "main.f1797c70.css.map": "/AlgoFlow/static/css/main.f1797c70.css.map",
+    "main.c80beecc.js.map": "/AlgoFlow/static/js/main.c80beecc.js.map",
     "453.79443422.chunk.js.map": "/AlgoFlow/static/js/453.79443422.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8aef75d4.css",
-    "static/js/main.2ddb3136.js"
+    "static/css/main.f1797c70.css",
+    "static/js/main.c80beecc.js"
   ]
 }
