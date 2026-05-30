@@ -18,6 +18,7 @@ function AlgoritmaDashboard() {
   const [showNamePopup, setShowNamePopup] = useState(true);
   const [tempName, setTempName] = useState('');
   const [selectedSymbol, setSelectedSymbol] = useState(null);
+  const [showPDF, setShowPDF] = useState(false);
 
 const isValidName = (name) => {
   const trimmed = name.trim();
@@ -800,41 +801,41 @@ if (showNamePopup) {
 
           return (
             <div className="min-h-screen relative overflow-hidden"
-  style={{ backgroundColor: '#eef2ff' }}>
-  
-  {/* Dekorasi shape flowchart di background */}
-  <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-    
-  {/* Oval/Terminator - pojok kiri atas */}
-  <div style={{ position: 'absolute', top: '2%', left: '-2%', width: '120px', height: '60px', borderRadius: '50%', border: '3px solid #818cf8', opacity: 0.08 }}></div>
-  
-  {/* Persegi Proses - pojok kanan atas */}
-  <div style={{ position: 'absolute', top: '5%', right: '-1%', width: '100px', height: '70px', border: '3px solid #818cf8', opacity: 0.08 }}></div>
+            style={{ backgroundColor: '#eef2ff' }}>
+            
+            {/* Dekorasi shape flowchart di background */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+              
+            {/* Oval/Terminator - pojok kiri atas */}
+            <div style={{ position: 'absolute', top: '2%', left: '-2%', width: '120px', height: '60px', borderRadius: '50%', border: '3px solid #818cf8', opacity: 0.08 }}></div>
+            
+            {/* Persegi Proses - pojok kanan atas */}
+            <div style={{ position: 'absolute', top: '5%', right: '-1%', width: '100px', height: '70px', border: '3px solid #818cf8', opacity: 0.08 }}></div>
 
-  {/* Belah Ketupat - pojok kiri tengah */}
-  <div style={{ position: 'absolute', top: '45%', left: '-2%', width: '80px', height: '80px', border: '3px solid #818cf8', opacity: 0.08, transform: 'rotate(45deg)' }}></div>
+            {/* Belah Ketupat - pojok kiri tengah */}
+            <div style={{ position: 'absolute', top: '45%', left: '-2%', width: '80px', height: '80px', border: '3px solid #818cf8', opacity: 0.08, transform: 'rotate(45deg)' }}></div>
 
-  {/* Jajar genjang - pojok kanan bawah */}
-  <div style={{ position: 'absolute', bottom: '10%', right: '-1%', width: '110px', height: '55px', border: '3px solid #818cf8', opacity: 0.08, transform: 'skewX(-15deg)' }}></div>
+            {/* Jajar genjang - pojok kanan bawah */}
+            <div style={{ position: 'absolute', bottom: '10%', right: '-1%', width: '110px', height: '55px', border: '3px solid #818cf8', opacity: 0.08, transform: 'skewX(-15deg)' }}></div>
 
-  {/* Oval besar - pojok kiri bawah */}
-  <div style={{ position: 'absolute', bottom: '2%', left: '-2%', width: '150px', height: '75px', borderRadius: '50%', border: '3px solid #818cf8', opacity: 0.07 }}></div>
+            {/* Oval besar - pojok kiri bawah */}
+            <div style={{ position: 'absolute', bottom: '2%', left: '-2%', width: '150px', height: '75px', borderRadius: '50%', border: '3px solid #818cf8', opacity: 0.07 }}></div>
 
-  {/* Belah ketupat kecil - pojok kanan tengah */}
-  <div style={{ position: 'absolute', top: '50%', right: '-1%', width: '60px', height: '60px', border: '3px solid #818cf8', opacity: 0.07, transform: 'rotate(45deg)' }}></div>
+            {/* Belah ketupat kecil - pojok kanan tengah */}
+            <div style={{ position: 'absolute', top: '50%', right: '-1%', width: '60px', height: '60px', border: '3px solid #818cf8', opacity: 0.07, transform: 'rotate(45deg)' }}></div>
 
-  {/* Garis penghubung kiri */}
-  <div style={{ position: 'absolute', top: '8%', left: '1%', width: '2px', height: '80px', backgroundColor: '#818cf8', opacity: 0.08 }}></div>
-  
-  {/* Garis penghubung kanan */}
-  <div style={{ position: 'absolute', bottom: '15%', right: '1%', width: '2px', height: '70px', backgroundColor: '#818cf8', opacity: 0.08 }}></div>
+            {/* Garis penghubung kiri */}
+            <div style={{ position: 'absolute', top: '8%', left: '1%', width: '2px', height: '80px', backgroundColor: '#818cf8', opacity: 0.08 }}></div>
+            
+            {/* Garis penghubung kanan */}
+            <div style={{ position: 'absolute', bottom: '15%', right: '1%', width: '2px', height: '70px', backgroundColor: '#818cf8', opacity: 0.08 }}></div>
 
-</div>
+          </div>
 
-              {/* Header */}
-              <div className="bg-white shadow-md border-b-4 border-indigo-500">
-                <div className="max-w-7xl mx-auto px-6 py-4">
-                  <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+         {/* Header */}
+          <div className="bg-white shadow-md border-b-4 border-indigo-500">
+           <div className="max-w-7xl mx-auto px-6 py-4">
+             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           {/* Judul */}
           <div className="flex items-center gap-3">
             <div className="bg-indigo-600 text-white p-2 md:p-3 rounded-lg flex-shrink-0">
@@ -859,10 +860,25 @@ if (showNamePopup) {
                 </span>
               </div>
               {/* Nama Siswa */}
+              <div className="flex items-center gap-2">
               <div className="flex items-center gap-2 bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-200">
                 <span className="text-indigo-600 text-sm">👤</span>
                 <span className="text-sm font-semibold text-indigo-800">{studentName}</span>
               </div>
+              <button
+                onClick={() => {
+                  setShowNamePopup(true);
+                  setStudentName('');
+                  setTempName('');
+                  setCompletedProblems([]);
+                  setCurrentProblemIndex(null);
+                  setActiveTab('materi');
+                }}
+                className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg font-semibold text-xs border border-red-300 flex items-center gap-1"
+              >
+                🚪 Keluar
+              </button>
+            </div>
             </div>
           </div>
         </div>
@@ -912,17 +928,36 @@ if (showNamePopup) {
               <div className="mt-4 pt-4 border-t border-gray-200">
                 <p className="text-xs text-gray-500 mb-2">📄 Materi Lengkap:</p>
                 <button
-                  onClick={() => window.open(process.env.PUBLIC_URL + '/MATERI-ALGORITMA.pdf', '_blank')}
+                  onClick={() => setShowPDF(!showPDF)}
                   className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold text-sm transition-all"
                 >
-                  📥 Download Materi PDF
+                  {showPDF ? '✖ Tutup Materi' : '📖 Lihat Materi Lengkap'}
                 </button>
               </div>
               </div>
             </div>
 
             <div className="md:col-span-2">
-              {selectedMateri ? (
+              {showPDF ? (
+                  /* Tampilan PDF */
+                  <div className="bg-white rounded-xl shadow-lg p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-bold text-gray-800">📖 Materi Lengkap</h3>
+                      <button
+                        onClick={() => setShowPDF(false)}
+                        className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg text-sm font-semibold"
+                      >
+                        ✖ Tutup
+                      </button>
+                    </div>
+                    <iframe
+                      src={process.env.PUBLIC_URL + '/MATERI-ALGORITMA.pdf'}
+                      className="w-full rounded-lg border border-gray-200"
+                      style={{ height: '75vh' }}
+                      title="Materi Lengkap"
+                    />
+                  </div>
+                ) : selectedMateri ? (
                 <div className="bg-white rounded-xl shadow-lg p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <span className="text-5xl">{selectedMateri.icon}</span>
